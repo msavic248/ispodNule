@@ -1,0 +1,31 @@
+:root {
+    /* Color palette */
+    --color-jonquil: #F7CA18;
+    --color-marine-blue: #003366;
+    --color-jet: #333333;
+    --color-white: #FFFFFF;
+
+    /* Light mode (default) */
+    --color-primary: var(--color-jonquil);
+    --color-secondary: var(--color-marine-blue);
+    --color-text: var(--color-jet);
+    --color-background: var(--color-white);
+}
+
+/* Dark mode */
+@media (prefers-color-scheme: dark) {
+    :root {
+        --color-primary: var(--color-marine-blue);
+        --color-secondary: var(--color-jonquil);
+        --color-text: var(--color-white);
+        --color-background: var(--color-jet);
+    }
+}
+
+/* Class-based dark mode toggle (for JavaScript-based theme switching) */
+.dark-theme {
+    --color-primary: var(--color-jonquil);
+    --color-secondary: var(--color-marine-blue);
+    --color-text: var(--color-white);
+    --color-background: var(--color-jet);
+}
