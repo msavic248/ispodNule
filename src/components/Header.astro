@@ -1,18 +1,18 @@
 ---
 const navLinks = [
     { href: '/', text: 'Home' },
-    { href: '/about', text: 'About' },
-    { href: '/services', text: 'Services' },
-    { href: '/projects', text: 'Projects' },
-    { href: '/contact', text: 'Contact' }
+    { href: '/', text: 'About' },
+    { href: '/', text: 'Services' },
+    { href: '/', text: 'Projects' },
+    { href: '/', text: 'Contact' }
 ];
 ---
 
-<header class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+<header class="bg-ispod-white dark:bg-ispod-jet max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
     <div class="flex justify-between items-center h-16">
         <!-- Logo -->
         <div class="flex-shrink-0 flex items-center">
-            <a href="/" class="text-xl font-bold text-gray-800">
+            <a href="/" class="text-xl font-bold text-ispod-blue dark:text-ispod-yellow">
                 <!-- Replace with your actual logo when available -->
                 <span>Ispod Nule</span>
                 <!-- <img class="h-8 w-auto" src="/path-to-your-logo.svg" alt="Logo"> -->
@@ -24,7 +24,7 @@ const navLinks = [
             {navLinks.map(link => (
                 <a 
                     href={link.href} 
-                    class="text-gray-600 hover:text-gray-900 px-3 py-2 text-sm font-medium transition duration-150 ease-in-out"
+                    class="text-ispod-jet hover:text-gray-900 dark:text-ispod-white dark:hover:text-gray-200 px-3 py-2 text-sm font-medium transition duration-150 ease-in-out"
                 >
                     {link.text}
                 </a>
