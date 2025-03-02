@@ -7,3 +7,4 @@
     --color-ispod-white: oklch(99.81% 0.0017 325.59);
 }
 
+@import './html_content.css';
