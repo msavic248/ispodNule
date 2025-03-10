@@ -1,43 +1,44 @@
 ---
 const navLinks = [
-    { href: '/', text: 'Home' },
     { href: '/', text: 'Services' },
     { href: '/', text: 'Projects' },
     { href: '/', text: 'Contact' }
 ];
+
+const navButtons = [
+    { href: '/', text: 'Login' },
+    { href: '/', text: 'Sign Up' }
+];
 ---
 
 <header id="site-header" class="fixed w-full px-4 sm:px-6 lg:px-8 top-0 z-50 transition-all duration-300 ease-in-out">
-    <div class="flex h-25 w-fit max-w-7xl mx-auto mt-4">
+    <div class="flex h-25 max-w-7xl mt-4 mx-auto">
         <!-- Navigation with logo in the middle -->
-        <nav class="bg-ispod-white/50 dark:bg-ispod-jet/50 backdrop-blur-sm flex items-center space-x-4 w-full justify-center border-b-2 rounded-3xl shadow my-2 px-4">
-            <!-- First half of nav links -->
+        <nav class="bg-ispod-white/50 dark:bg-ispod-jet/50 backdrop-blur-sm flex items-center justify-between space-x-4 w-full border-b-2 rounded-3xl shadow my-2 px-4">
+            <a href="/" class="">
+                <img class="h-25 w-auto aspect-square object-contain" src="/ispodNuleLogo.png" alt="Logo">
+            </a>
+
             <div class="flex space-x-4">
-                {navLinks.slice(0, Math.ceil(navLinks.length / 2)).map(link => (
+                {navLinks.map(link => (
                     <a 
                     href={link.href} 
-                    class="text-ispod-jet hover:text-gray-900 dark:text-ispod-white dark:hover:text-gray-200 px-3 py-2 font-medium transition duration-150 ease-in-out"
+                    class="text-ispod-jet hover:text-ispod-yellow dark:text-ispod-white dark:hover:text-ispod-blue px-3 py-2 transition duration-150 ease-in-out"
                     >
                     {link.text}
                     </a>
                 ))}
             </div>
-            
-            <!-- Logo in the middle -->
-            <a href="/" class="">
-                <img class="h-25 w-auto" src="/ispodNuleLogo.png" alt="Logo">
-            </a>
-            
-            <!-- Second half of nav links -->
+
             <div class="flex space-x-4">
-            {navLinks.slice(Math.ceil(navLinks.length / 2)).map(link => (
-                <a 
-                href={link.href} 
-                class="text-ispod-jet hover:text-gray-900 dark:text-ispod-white dark:hover:text-gray-200 px-3 py-2 font-medium transition duration-150 ease-in-out"
-                >
-                {link.text}
-                </a>
-            ))}
+                {navButtons.map(button => (
+                    <a 
+                    href={button.href} 
+                    class="text-ispod-white bg-ispod-jet hover:bg-ispod-blue px-3 py-2 rounded-lg transition duration-150 ease-in-out"
+                    >
+                    {button.text}
+                    </a>
+                ))}
             </div>
         </nav>
     </div>
