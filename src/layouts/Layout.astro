@@ -11,6 +11,18 @@ import Footer from '../components/Footer.astro';
 	<head>
 		<meta charset="UTF-8" />
 		<Head />
+
+		<script is:inline>
+			// Immediately on page load, before any DOM rendering
+			const theme = localStorage.getItem('theme') || 
+							(window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+			
+			if (theme === 'dark') {
+				document.documentElement.classList.add('dark');
+			} else {
+				document.documentElement.classList.remove('dark');
+			}
+		</script>
 	</head>
 	<body>
 		<Header />

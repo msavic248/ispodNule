@@ -1,29 +1,39 @@
 ---
+import VideoCards from '../components/VideoCards.astro';
 import Layout from '../layouts/Layout.astro';
 
 ---
 
 <Layout>
-	<main class="bg-ispod-white text-ispod-jet">
-		<section class="bg-gray-300 h-dvh flex flex-col items-center justify-center">
-			<h1>Hello, Astro!</h1>
-			<p>Welcome to your new Astro site.</p>
+	<main class="bg-ispod-white dark:bg-ispod-jet text-ispod-jet dark:text-ispod-white">
+		<section class="bg-gray-300 dark:bg-gray-600 h-dvh flex flex-col items-center justify-center p-4">
+			<h1>Book a session</h1>
+			<VideoCards server:defer>
+				<div slot="fallback" class="flex flex-wrap gap-4">
+					{[1, 2, 3].map((i) => (
+					<div class="bg-ispod-jet dark:bg-gray-200 text-ispod-white dark:text-ispod-jet p-4 rounded-lg shadow-md mb-4">
+						<h2>Video {i}</h2>
+						<p>Video description</p>
+					</div>
+					))}
+				</div>
+			</VideoCards>
 		</section>
-		<section class="h-dvh">
+		<section class="flex flex-col items-center justify-center h-dvh p-4">
 			<div class="max-w-6xl mx-auto px-4 py-8">
-				<h2>Section 2</h2>
+				<h2>What we offer</h2>
+				
+			</div>
+		</section>
+		<section class="bg-gray-200 dark:bg-gray-600 h-dvh flex flex-col items-center justify-center p-4">
+			<div class="max-w-6xl mx-auto px-4 py-8">
+				<h2>Past projects</h2>
 				<p>More text...</p>
 			</div>
 		</section>
-		<section class="bg-gray-200 h-dvh flex flex-col items-center justify-center">
+		<section class="h-dvh flex flex-col items-center justify-center p-4">
 			<div class="max-w-6xl mx-auto px-4 py-8">
-				<h2>Section 3</h2>
-				<p>More text...</p>
-			</div>
-		</section>
-		<section class="h-dvh flex flex-col items-center justify-center">
-			<div class="max-w-6xl mx-auto px-4 py-8">
-				<h2>Section 4</h2>
+				<h2>Book a session</h2>
 				<p>More text...</p>
 			</div>
 		</section>

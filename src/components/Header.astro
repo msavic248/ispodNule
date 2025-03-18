@@ -1,19 +1,15 @@
 ---
+import { Icon } from 'astro-icon/components'
+
 const navLinks = [
     { href: '/', text: 'Services' },
     { href: '/', text: 'Projects' },
     { href: '/', text: 'Contact' }
 ];
-
-const navButtons = [
-    { href: '/', text: 'Login' },
-    { href: '/', text: 'Sign Up' }
-];
 ---
 
 <header id="site-header" class="fixed w-full px-4 sm:px-6 lg:px-8 top-0 z-50 transition-all duration-300 ease-in-out">
     <div class="flex h-25 max-w-7xl mt-4 mx-auto">
-        <!-- Navigation with logo in the middle -->
         <nav class="bg-ispod-white/50 dark:bg-ispod-jet/50 backdrop-blur-sm flex items-center justify-between space-x-4 w-full border-b-2 rounded-3xl shadow my-2 px-4">
             <a href="/" class="">
                 <img class="h-25 w-auto aspect-square object-contain" src="/ispodNuleLogo.png" alt="Logo">
@@ -31,47 +27,57 @@ const navButtons = [
             </div>
 
             <div class="flex space-x-4">
-                {navButtons.map(button => (
-                    <a 
-                    href={button.href} 
-                    class="text-ispod-white bg-ispod-jet hover:bg-ispod-blue px-3 py-2 rounded-lg transition duration-150 ease-in-out"
-                    >
-                    {button.text}
-                    </a>
-                ))}
+                <button id="theme-toggle" class="text-ispod-jet dark:text-ispod-white hover:text-ispod-jet hover:bg-ispod-yellow hover:dark:bg-ispod-blue px-3 py-2 rounded-lg transition duration-150 ease-in-out cursor-pointer">
+                    <Icon name="line-md:sunny" class="theme-icon" size="24" data-mode="light" /> 
+                    <Icon name="line-md:moon" class="theme-icon hidden" size="24" data-mode="dark" />
+                </button>
             </div>
         </nav>
     </div>
 </header>
 
 <script>
-    let lastScrollY = window.scrollY;
-    const header = document.getElementById('site-header');
+    // Theme toggle logic
+    const themeToggle = document.getElementById('theme-toggle');
+    const lightIcon = document.querySelector('.theme-icon[data-mode="light"]');
+    const darkIcon = document.querySelector('.theme-icon[data-mode="dark"]');
     
-    // Function to handle scroll events with a small threshold
-    const handleScroll = () => {
-        const currentScrollY = window.scrollY;
-        
-        // Only react if we've scrolled at least 5px
-        if (Math.abs(currentScrollY - lastScrollY) < 5) return;
-        
-        if (currentScrollY > lastScrollY && currentScrollY > 50) {
-            // Scrolling down & past threshold
-            header?.classList.add('opacity-0', '-translate-y-full');
-        } else {
-            // Scrolling up or at the top
-            header?.classList.remove('opacity-0', '-translate-y-full');
+    type ThemeType = 'dark' | 'light';
+
+    // Check for saved theme preference or use the system preference
+    const getThemePreference = (): ThemeType => {
+        if (typeof localStorage !== 'undefined' && localStorage.getItem('theme')) {
+            const savedTheme = localStorage.getItem('theme');
+            // Make sure it's a valid theme
+            return (savedTheme === 'dark' || savedTheme === 'light') ? savedTheme : 'light';
         }
-        
-        lastScrollY = currentScrollY;
+
+        return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
     };
     
-    // Debounce function for better performance
-    let scrollTimeout: number | undefined;
-    window.addEventListener('scroll', () => {
-        if (scrollTimeout) {
-            window.cancelAnimationFrame(scrollTimeout);
+    const applyTheme = (theme: ThemeType): void => {
+        if (theme === 'dark') {
+            document.documentElement.classList.add('dark');
+            lightIcon?.classList.add('hidden');
+            darkIcon?.classList.remove('hidden');
+        } else {
+            document.documentElement.classList.remove('dark');
+            lightIcon?.classList.remove('hidden');
+            darkIcon?.classList.add('hidden');
         }
-        scrollTimeout = window.requestAnimationFrame(handleScroll);
-    }, { passive: true });
+        
+        localStorage.setItem('theme', theme);
+        document.documentElement.classList.contains('dark') ? 'dark' : 'light';
+    };
+    
+    // Initial theme setup
+    applyTheme(getThemePreference());
+    
+    // Toggle theme on button click
+    themeToggle?.addEventListener('click', () => {
+        const isDark = document.documentElement.classList.contains('dark');
+        const newTheme = isDark ? 'light' : 'dark';
+        
+        applyTheme(newTheme);
+    });
 </script>

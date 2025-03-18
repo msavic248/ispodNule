@@ -1,6 +1,8 @@
 @import url('https://fonts.googleapis.com/css2?family=Anton&display=swap');
 @import "tailwindcss";
 
+@custom-variant dark (&:where(.dark, .dark *));
+
 @theme {
     --color-ispod-yellow: oklch(85.37% 0.1711 92.08);
     --color-ispod-blue: oklch(77.43% 0.0841 237.38);
