@@ -1,8 +1,31 @@
+---
+import { xmlToJsonUtil } from "xml-to-json-util";
+import { Icon } from 'astro-icon/components'
+
+const req = await fetch('https://youtube.com/feeds/videos.xml?channel_id=UCKKuLamy2Dhl-lbf_N-X7Ag');
+
+const xml = await req.text();
+
+const parsedXml = xmlToJsonUtil(xml);
+
+const finalVideos = parsedXml.feed.entry.slice(0, 3).map((video: any) => {
+    return {
+        title: video.title,
+        id: video['yt:videoId'],
+        
+    };
+});
+
+---
+
 <div class="flex flex-wrap gap-4">
-    {[1, 2, 3].map((i) => (
-    <div class="bg-ispod-jet dark:bg-gray-200 text-ispod-white dark:text-ispod-jet p-4 rounded-lg shadow-md mb-4">
-        <h2>Video {i}</h2>
-        <p>Video description</p>
+    {finalVideos.map(({ title, id }) => (
+    <div class="bg-ispod-jet dark:bg-gray-200 text-ispod-white dark:text-ispod-jet border-2 rounded-lg shadow-md hover:shadow-2xl transition ease-in-out w-60 h-32 grid place-items-center cursor-pointer">
+        <a href={`https://youtube.com/watch?v=${id}`} target="_blank" rel="noopener noreferrer" class="text-ispod-white dark:text-ispod-jet">
+            <img src={`https://img.youtube.com/vi/${id}/maxresdefault.jpg`} 
+                alt={title}/>
+        </a>
+        <Icon name="line-md:play" size="32" class="absolute" />
     </div>
     ))}
 </div>
