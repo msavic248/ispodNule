@@ -20,7 +20,7 @@ const finalVideos = parsedXml.feed.entry.slice(0, 3).map((video: any) => {
 
 <div class="flex flex-wrap gap-4">
     {finalVideos.map(({ title, id }) => (
-    <div class="bg-ispod-jet dark:bg-gray-200 text-ispod-white dark:text-ispod-jet border-2 rounded-lg shadow-md hover:shadow-2xl transition ease-in-out w-60 h-32 grid place-items-center cursor-pointer">
+    <div class="bg-ispod-jet dark:bg-gray-200 text-ispod-white dark:text-ispod-jet border-2 rounded-lg shadow-md hover:shadow-2xl transition ease-in-out w-88 grow md:flex-1 grid place-items-center cursor-pointer">
         <a href={`https://youtube.com/watch?v=${id}`} target="_blank" rel="noopener noreferrer" class="text-ispod-white dark:text-ispod-jet">
             <img src={`https://img.youtube.com/vi/${id}/maxresdefault.jpg`} 
                 alt={title}/>

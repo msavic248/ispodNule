@@ -8,19 +8,19 @@ import Layout from '../layouts/Layout.astro';
 	<main class="bg-ispod-white dark:bg-ispod-jet text-ispod-jet dark:text-ispod-white">
 		<section class="bg-gray-300 dark:bg-gray-600 h-dvh flex flex-col items-center justify-center gap-4 p-4">
 			<h1 class="">Book a session</h1>
+			<a href="#book" class="bg-ispod-jet dark:bg-ispod-white text-ispod-white dark:text-ispod-jet px-4 py-2 rounded-lg shadow-md hover:shadow-2xl transition ease-in-out">Book now</a>
 		</section>
 		<section class="flex flex-col items-center justify-center h-dvh p-4">
 			<div class="max-w-6xl mx-auto px-4 py-8">
 				<h2 class="pb-4">What we offer</h2>
-				<VideoCards server:defer>
-					<div slot="fallback" class="flex flex-wrap gap-4">
-						{[1, 2, 3].map((i) => (
-						<div class="bg-ispod-jet dark:bg-gray-200 text-ispod-white dark:text-ispod-jet border-2 rounded-lg shadow-md hover:shadow-2xl transition ease-in-out w-60 h-40 p-4 grid place-items-center cursor-pointer animate-pulse">
-	
-						</div>
-						))}
-					</div>
-				</VideoCards>
+				<ul class="grid grid-cols-3 gap-16 text-xl list-disc">
+					<li>One-on-one sessions</li>
+					<li>Group sessions</li>
+					<li>Workshops</li>
+					<li>Consulting</li>
+					<li>Custom projects</li>
+					<li>More...</li>
+				</ul>
 			</div>
 		</section>
 		<section class="bg-gray-200 dark:bg-gray-600 flex flex-col items-center justify-center h-dvh p-4">
