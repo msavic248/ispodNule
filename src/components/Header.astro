@@ -11,21 +11,19 @@ const navLinks = [
 ---
 
 <script>
-    // Theme toggle logic
+    import gsap from '../utils/gsap.js';
+
     const themeToggle = document.getElementById('theme-toggle');
     const lightIcon = document.querySelector('.theme-icon[data-mode="light"]');
     const darkIcon = document.querySelector('.theme-icon[data-mode="dark"]');
     
     type ThemeType = 'dark' | 'light';
 
-    // Check for saved theme preference or use the system preference
     const getThemePreference = (): ThemeType => {
         if (typeof localStorage !== 'undefined' && localStorage.getItem('theme')) {
             const savedTheme = localStorage.getItem('theme');
-            // Make sure it's a valid theme
             return (savedTheme === 'dark' || savedTheme === 'light') ? savedTheme : 'light';
         }
-
         return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
     };
     
@@ -39,44 +37,34 @@ const navLinks = [
             lightIcon?.classList.remove('hidden');
             darkIcon?.classList.add('hidden');
         }
-        
-        localStorage.setItem('theme', theme);
-        document.documentElement.classList.contains('dark') ? 'dark' : 'light';
+        if (typeof localStorage !== 'undefined') {
+            localStorage.setItem('theme', theme);
+        }
     };
-    
+
     // Initial theme setup
-    applyTheme(getThemePreference());
+    const initialTheme = getThemePreference();
+    applyTheme(initialTheme);
     
-    // Toggle theme on button click
     themeToggle?.addEventListener('click', () => {
         const isDark = document.documentElement.classList.contains('dark');
-        const newTheme = isDark ? 'light' : 'dark';
-        
-        applyTheme(newTheme);
+        const newThemeToApply = isDark ? 'light' : 'dark';
+        applyTheme(newThemeToApply);
     });
 
+    // Existing scroll behavior for header
     let lastScrollY = window.scrollY;
     const header = document.getElementById('site-header');
-
-    // Function to handle scroll events with a small threshold
     const handleScroll = () => {
         const currentScrollY = window.scrollY;
-
-        // Only react if we've scrolled at least 5px
         if (Math.abs(currentScrollY - lastScrollY) < 5) return;
-
         if (currentScrollY > lastScrollY && currentScrollY > 50) {
-            // Scrolling down & past threshold
-            header?.classList.add('opacity-0', '-translate-y-full');
+            gsap.to(header, { opacity: 0, y: '-100%', duration: 0.2, ease: 'power1.in' });
         } else {
-            // Scrolling up or at the top
-            header?.classList.remove('opacity-0', '-translate-y-full');
+            gsap.to(header, { opacity: 1, y: '0%', duration: 0.2, ease: 'power1.in' });
         }
-
         lastScrollY = currentScrollY;
     };
-
-    // Debounce function for better performance
     let scrollTimeout: number | undefined;
     window.addEventListener('scroll', () => {
         if (scrollTimeout) {
@@ -115,5 +103,8 @@ const navLinks = [
 </header>
 
 <style>
-
+/* Minimal style to ensure body transition is smooth if not already handled by global styles */
+/* body {
+    transition: background-color 0.4s ease-in-out, color 0.4s ease-in-out; 
+} */
 </style>

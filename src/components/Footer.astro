@@ -1,35 +1,64 @@
 ---
+import { Icon } from 'astro-icon/components';
 const currentYear = new Date().getFullYear();
 
+const socialLinks = [
+  { href: "#", label: "Facebook", iconName: "mdi:facebook" },
+  { href: "#", label: "Twitter", iconName: "mdi:twitter" },
+  { href: "#", label: "Instagram", iconName: "mdi:instagram" },
+  { href: "#", label: "LinkedIn", iconName: "mdi:linkedin" }
+];
+
+const navLinks = [
+    { href: "/", text: "Home" },
+    { href: "/about", text: "About Us" },
+    { href: "/services", text: "Services" },
+    { href: "/contact", text: "Contact" }
+];
 ---
 
-<footer class="bg-ispod-jet text-ispod-white border-t-2 shadow-2xl py-8">
-    <div class="max-w-7xl mx-auto px-4">
-        <div class="flex flex-wrap justify-between items-center mb-6">
-            <div class="mb-4 md:mb-0">
-                <img class="h-35 w-auto" src="/ispodNuleLogo.png" alt="Logo">
-            </div>
-            <div class="flex space-x-4">
-                <a href="#" aria-label="Facebook" class="hover:text-ispod-blue transition-colors">
-                    <i class="fa fa-facebook">F</i>
-                </a>
-                <a href="#" aria-label="Twitter" class="hover:text-ispod-blue transition-colors">
-                    <i class="fa fa-twitter">T</i>
-                </a>
-                <a href="#" aria-label="Instagram" class="hover:text-ispod-blue transition-colors">
-                    <i class="fa fa-instagram">I</i>
+<footer class="bg-ispod-jet text-ispod-white border-t-2 border-ispod-blue/50 shadow-2xl pt-12 pb-8">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8 items-center mb-8">
+            
+            <div class="flex justify-center md:justify-start">
+                <a href="/" class="block transform hover:scale-105 transition-transform duration-300 ease-in-out">
+                    <img class="h-24 sm:h-28 md:h-32 w-auto" src="/ispodNuleLogo.png" alt="IspodNule Logo">
                 </a>
             </div>
+
+            <nav class="text-center md:text-left">
+                <h3 class="text-lg font-semibold text-ispod-yellow mb-3">Quick Links</h3>
+                <ul class="space-y-2">
+                    {navLinks.map(link => (
+                        <li>
+                            <a href={link.href} class="hover:text-ispod-blue transition-colors duration-200 ease-in-out text-base">
+                                {link.text}
+                            </a>
+                        </li>
+                    ))}
+                </ul>
+            </nav>
+
+            <div class="text-center md:text-right">
+                <h3 class="text-lg font-semibold text-ispod-yellow mb-3">Connect With Us</h3>
+                <div class="flex justify-center md:justify-end space-x-4">
+                    {socialLinks.map(link => (
+                        <a 
+                            href={link.href} 
+                            aria-label={link.label} 
+                            class="text-ispod-white hover:text-ispod-blue transform hover:scale-125 transition-all duration-300 ease-in-out"
+                        >
+                            <Icon name={link.iconName} size={28} />
+                        </a>
+                    ))}
+                </div>
+            </div>
         </div>
-        <div class="flex mb-4 md:mb-0 px-4">
-            <ul class="flex flex-col space-x-6 gap-2">
-                <li><a href="/" class="hover:text-ispod-blue transition-colors">Home</a></li>
-                <li><a href="/about" class="hover:text-ispod-blue transition-colors">About</a></li>
-                <li><a href="/contact" class="hover:text-ispod-blue transition-colors">Contact</a></li>
-            </ul>
-        </div>
-        <div class="text-center text-sm text-ispod-white pt-6 border-t border-gray-700">
+
+        <div class="text-center text-sm text-gray-400 pt-8 border-t border-gray-700">
             <p>&copy; {currentYear} IspodNule. All rights reserved.</p>
+            <p class="mt-1">Crafted with <Icon name="mdi:heart" class="inline-block text-red-500" size={16} /> in Astro</p>
         </div>
     </div>
 </footer>

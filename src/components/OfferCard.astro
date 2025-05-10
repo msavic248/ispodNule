@@ -1,0 +1,20 @@
+---
+// src/components/OfferCard.astro
+import { Icon } from 'astro-icon/components';
+
+export interface Props {
+  title: string;
+  description: string;
+  iconName: string;
+}
+
+const { title, description, iconName } = Astro.props;
+---
+
+<div class="bg-gray-50 dark:bg-neutral-700 shadow-md p-6 flex flex-col items-center text-center hover:shadow-lg transition-shadow duration-300 ease-in-out h-full">
+  <div class="mb-4 text-ispod-blue dark:text-ispod-yellow">
+    <Icon name={iconName} size={48} />
+  </div>
+  <h3 class="text-xl font-semibold mb-2 text-ispod-jet dark:text-ispod-white">{title}</h3>
+  <p class="text-sm text-gray-700 dark:text-gray-200 flex-grow">{description}</p>
+</div>

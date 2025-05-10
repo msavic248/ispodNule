@@ -1,7 +1,40 @@
 ---
 import VideoCards from '../components/VideoCards.astro';
 import Layout from '../layouts/Layout.astro';
+import OfferCard from '../components/OfferCard.astro';
 
+const offers = [
+  {
+    title: "One-on-one sessions",
+    description: "Personalized coaching tailored to your specific needs and goals.",
+    iconName: "mdi:account-voice"
+  },
+  {
+    title: "Group sessions",
+    description: "Collaborative learning and development in a supportive group environment.",
+    iconName: "mdi:account-group"
+  },
+  {
+    title: "Workshops",
+    description: "Interactive workshops designed to build skills and foster creativity.",
+    iconName: "mdi:teach"
+  },
+  {
+    title: "Consulting",
+    description: "Expert advice and strategies to help you overcome challenges.",
+    iconName: "mdi:briefcase-account"
+  },
+  {
+    title: "Custom projects",
+    description: "Tailored solutions and project development to meet unique requirements.",
+    iconName: "mdi:lightbulb-on-outline"
+  },
+  {
+    title: "And More...",
+    description: "Contact us to discuss other ways we can help you achieve your objectives.",
+    iconName: "mdi:dots-horizontal-circle-outline"
+  }
+];
 ---
 
 <Layout>
@@ -10,17 +43,14 @@ import Layout from '../layouts/Layout.astro';
 			<h1 class="">Book a session</h1>
 			<a href="#book" class="bg-ispod-jet dark:bg-ispod-white text-ispod-white dark:text-ispod-jet px-4 py-2 rounded-lg shadow-md hover:shadow-2xl transition ease-in-out">Book now</a>
 		</section>
-		<section class="flex flex-col items-center justify-center h-dvh p-4">
-			<div class="max-w-6xl mx-auto px-4 py-8">
-				<h2 class="pb-4">What we offer</h2>
-				<ul class="grid grid-cols-3 gap-16 text-xl list-disc">
-					<li>One-on-one sessions</li>
-					<li>Group sessions</li>
-					<li>Workshops</li>
-					<li>Consulting</li>
-					<li>Custom projects</li>
-					<li>More...</li>
-				</ul>
+		<section class="flex flex-col items-center justify-center min-h-dvh p-4 py-16">
+			<div class="max-w-6xl mx-auto px-4">
+				<h2 class="text-3xl font-bold text-center mb-12">What we offer</h2>
+				<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+					{offers.map(offer => (
+						<OfferCard title={offer.title} description={offer.description} iconName={offer.iconName} />
+					))}
+				</div>
 			</div>
 		</section>
 		<section class="bg-gray-200 dark:bg-gray-600 flex flex-col items-center justify-center h-dvh p-4">
