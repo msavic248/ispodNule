@@ -2,6 +2,7 @@
 import VideoCards from '../components/VideoCards.astro';
 import Layout from '../layouts/Layout.astro';
 import OfferCard from '../components/OfferCard.astro';
+import { Icon } from 'astro-icon/components'; // Added Icon import
 
 const offers = [
   {
@@ -35,13 +36,59 @@ const offers = [
     iconName: "mdi:dots-horizontal-circle-outline"
   }
 ];
+
+const testimonials = [
+  {
+    name: "Rouzi",
+    quote: "Ispod Nule literally saved my life! Can't recommend them enough.",
+    iconName: "mdi:account-circle"
+  },
+  {
+    name: "Zbidelj",
+    quote: "The best learning experience I've ever had. Truly transformative!",
+    iconName: "mdi:account-circle"
+  },
+  {
+    name: "Prpa",
+    quote: "My skills skyrocketed thanks to Ispod Nule. Worth every penny!",
+    iconName: "mdi:account-circle"
+  }
+];
 ---
 
 <Layout>
 	<main class="bg-ispod-white dark:bg-ispod-jet text-ispod-jet dark:text-ispod-white">
-		<section class="bg-gray-300 dark:bg-gray-600 h-dvh flex flex-col items-center justify-center gap-4 p-4">
-			<h1 class="">Book a session</h1>
-			<a href="#book" class="bg-ispod-jet dark:bg-ispod-white text-ispod-white dark:text-ispod-jet px-4 py-2 rounded-lg shadow-md hover:shadow-2xl transition ease-in-out">Book now</a>
+		<section class="relative overflow-hidden h-dvh flex flex-col lg:flex-row items-center justify-center lg:justify-between p-4 lg:p-8 xl:p-16 bg-gradient-to-b from-gray-200 to-ispod-white dark:from-black dark:to-ispod-jet grainy">
+			<!-- Background Logo for small screens -->
+			<img 
+				src="/ispodNuleLogo.png" 
+				alt="" 
+				aria-hidden="true"
+				class="absolute inset-0 m-auto w-2/3 sm:w-1/2 md:w-1/3 max-h-[70vh] object-contain z-0 lg:hidden"
+			/>
+
+			<!-- Left Column: Logo for large screens -->
+			<div class="hidden lg:flex lg:w-1/2 items-center justify-center pr-4 xl:pr-8">
+				<img 
+					src="/ispodNuleLogo.png" 
+					alt="" 
+					aria-hidden="true"
+					class="w-full max-w-sm xl:max-w-md max-h-[60vh] object-contain"
+				/>
+			</div>
+
+			<!-- Right Column: Content -->
+			<div class="relative z-10 flex flex-col items-center lg:items-start justify-center text-center lg:text-left gap-4 lg:w-1/2 pl-4 xl:pl-8">
+				<h1 class="text-4xl sm:text-5xl font-bold text-ispod-jet dark:text-ispod-white">
+					Book a session
+				</h1>
+				<a 
+					href="#offers" 
+					class="bg-ispod-blue dark:bg-ispod-yellow text-ispod-white dark:text-ispod-jet px-6 py-3 rounded-lg shadow-md hover:shadow-xl transition-all ease-in-out text-lg transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-ispod-yellow focus:ring-offset-2 focus:ring-offset-ispod-white dark:focus:ring-offset-ispod-jet"
+				>
+					Book Now
+				</a>
+			</div>
 		</section>
 		<section class="flex flex-col items-center justify-center min-h-dvh p-4 py-16">
 			<div class="max-w-6xl mx-auto px-4">
@@ -53,7 +100,7 @@ const offers = [
 				</div>
 			</div>
 		</section>
-		<section class="bg-gray-200 dark:bg-gray-600 flex flex-col items-center justify-center h-dvh p-4">
+		<section class="relative bg-gradient-to-b from-ispod-white to-gray-200 dark:from-ispod-jet dark:to-black flex flex-col items-center justify-center h-dvh p-4 grainy">
 			<div class="max-w-6xl mx-auto px-4 py-8">
 				<h2 class="pb-4">Past projects</h2>
 				<VideoCards server:defer>
@@ -67,10 +114,29 @@ const offers = [
 				</VideoCards>
 			</div>
 		</section>
-		<section class="flex flex-col items-center justify-center h-dvh p-4">
-			<div class="max-w-6xl mx-auto px-4 py-8">
-				<h2 class="pb-4">Book a session</h2>
-				<p>More text...</p>
+		<section class="bg-gray-200 dark:bg-black py-16">
+			<div class="max-w-6xl mx-auto px-4 text-center">
+				<h2 class="text-4xl sm:text-5xl font-bold mb-12 text-ispod-jet dark:text-ispod-white">Testimonials</h2>
+				<div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+					{testimonials.map(testimonial => (
+						<div class="bg-white dark:bg-neutral-800 p-6 rounded-lg shadow-xl flex flex-col items-center text-center transform hover:scale-105 transition-transform duration-300 ease-in-out">
+							<Icon name={testimonial.iconName} class="mb-4 text-ispod-blue dark:text-ispod-yellow" size={56} />
+							<h3 class="text-2xl font-semibold mb-3 text-ispod-jet dark:text-ispod-white">{testimonial.name}</h3>
+							<p class="text-base text-gray-700 dark:text-gray-300 leading-relaxed">"{testimonial.quote}"</p>
+						</div>
+					))}
+				</div>
+			</div>
+		</section>
+		<section class="relative flex flex-col items-center justify-center h-dvh p-4 bg-gradient-to-b from-gray-200 to-ispod-white dark:from-black dark:to-ispod-jet grainy">
+			<div class="max-w-6xl mx-auto px-4 py-8 flex flex-col items-center text-center"> 
+				<h2 class="pb-4 text-4xl sm:text-5xl font-bold">Book a session</h2>
+				<a 
+					href="#offers" 
+					class="bg-ispod-blue dark:bg-ispod-yellow text-ispod-white dark:text-ispod-jet px-6 py-3 rounded-lg shadow-md hover:shadow-xl transition-all ease-in-out text-lg transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-ispod-yellow focus:ring-offset-2 focus:ring-offset-ispod-white dark:focus:ring-offset-ispod-jet mt-4"
+				>
+					Book Now
+				</a>
 			</div>
 		</section>
 	</main>

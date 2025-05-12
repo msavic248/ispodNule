@@ -72,33 +72,68 @@ const navLinks = [
         }
         scrollTimeout = window.requestAnimationFrame(handleScroll);
     }, { passive: true });
+
+    // Mobile menu toggle script
+    document.addEventListener('DOMContentLoaded', () => {
+        const mobileMenuButton = document.getElementById('mobile-menu-trigger');
+        const mobileMenuPanel = document.getElementById('mobile-menu-panel');
+
+        mobileMenuButton?.addEventListener('click', () => {
+            const isExpanded = mobileMenuButton.getAttribute('aria-expanded') === 'true' || false;
+            mobileMenuButton.setAttribute('aria-expanded', (!isExpanded).toString());
+            mobileMenuPanel?.classList.toggle('hidden');
+        });
+    });
 </script>
 
-<header id="site-header" class="fixed w-full px-4 sm:px-6 lg:px-8 top-0 z-50 transition-all duration-300 ease-in-out">
-    <div class="flex h-25 max-w-7xl mt-4 mx-auto">
-        <nav class="bg-ispod-white/50 dark:bg-ispod-jet/50 backdrop-blur-sm flex items-center justify-between space-x-4 w-full border-b-4 dark:border-ispod-blue rounded-xl shadow hover:shadow-lg my-2 px-4 transition-all duration-300 ease-in-out">
-            <a href="/" class="">
-                <img class="h-25 w-auto aspect-square object-contain" src="/ispodNuleLogo.png" alt="Logo">
-            </a>
+<header id="site-header" class="fixed w-full top-0 z-50 bg-ispod-white dark:bg-black shadow-md transition-all duration-300 ease-in-out">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex items-center justify-between h-16">
+            <div class="flex items-center">
+                <a href="/" class="flex-shrink-0">
+                    <img class="h-14 w-auto" src="/ispodNuleLogo.png" alt="IspodNule Logo">
+                </a>
+            </div>
 
-            <div class="flex space-x-4">
+            <nav class="hidden md:flex items-center space-x-1">
                 {navLinks.map(link => (
-                    <a 
-                    href={link.href} 
-                    class="text-ispod-jet hover:text-ispod-yellow dark:text-ispod-white dark:hover:text-ispod-blue text-xl px-3 py-2 transition duration-150 ease-in-out"
+                    <a
+                        href={link.href}
+                        class="text-ispod-jet dark:text-ispod-white hover:text-ispod-blue dark:hover:text-ispod-yellow px-3 py-2 rounded-md text-lg font-medium transition-colors duration-150 ease-in-out"
                     >
-                    {link.text}
+                        {link.text}
                     </a>
                 ))}
-            </div>
+            </nav>
 
-            <div class="flex space-x-4">
-                <button id="theme-toggle" class="text-ispod-jet dark:text-ispod-white hover:text-ispod-jet hover:bg-ispod-yellow hover:dark:bg-ispod-blue px-3 py-2 rounded-lg transition duration-150 ease-in-out cursor-pointer">
-                    <Icon name="line-md:sunny" class="theme-icon" size="24" data-mode="light" /> 
-                    <Icon name="line-md:moon" class="theme-icon hidden" size="24" data-mode="dark" />
+            <div class="flex items-center">
+                <button id="theme-toggle" class="text-ispod-jet dark:text-ispod-white hover:text-ispod-yellow dark:hover:text-ispod-blue p-2 rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-ispod-white dark:focus:ring-offset-ispod-jet focus:ring-ispod-yellow dark:focus:ring-ispod-blue transition-colors duration-150 ease-in-out">
+                    <span class="sr-only">Toggle theme</span>
+                    <Icon name="line-md:sunny" class="theme-icon h-6 w-6" data-mode="light" />
+                    <Icon name="line-md:moon" class="theme-icon hidden h-6 w-6" data-mode="dark" />
                 </button>
+
+                <div class="md:hidden ml-2">
+                    <button type="button" id="mobile-menu-trigger" class="text-ispod-jet dark:text-ispod-white hover:text-ispod-blue dark:hover:text-ispod-yellow p-2 rounded-md inline-flex items-center justify-center focus:outline-none focus:ring-2 focus:ring-inset focus:ring-ispod-blue dark:focus:ring-ispod-yellow cursor-pointer" aria-controls="mobile-menu-panel" aria-expanded="false">
+                        <span class="sr-only">Open main menu</span>
+                        <Icon name="mdi:menu" class="h-6 w-6" aria-hidden="true" />
+                    </button>
+                </div>
             </div>
-        </nav>
+        </div>
+    </div>
+
+    <div class="hidden md:hidden bg-ispod-white dark:bg-ispod-jet" id="mobile-menu-panel">
+        <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+            {navLinks.map(link => (
+                <a
+                    href={link.href}
+                    class="block text-ispod-jet dark:text-ispod-white hover:text-ispod-blue dark:hover:text-ispod-yellow hover:bg-ispod-jet/10 dark:hover:bg-ispod-white/10 px-3 py-2 rounded-md text-base font-medium transition-colors duration-150 ease-in-out"
+                >
+                    {link.text}
+                </a>
+            ))}
+        </div>
     </div>
 </header>
 

@@ -3,10 +3,9 @@ import { Icon } from 'astro-icon/components';
 const currentYear = new Date().getFullYear();
 
 const socialLinks = [
-  { href: "#", label: "Facebook", iconName: "mdi:facebook" },
-  { href: "#", label: "Twitter", iconName: "mdi:twitter" },
   { href: "#", label: "Instagram", iconName: "mdi:instagram" },
-  { href: "#", label: "LinkedIn", iconName: "mdi:linkedin" }
+  { href: "#", label: "YouTube", iconName: "mdi:youtube" },
+  { href: "#", label: "TikTok", iconName: "mdi:facebook" },
 ];
 
 const navLinks = [
@@ -17,9 +16,9 @@ const navLinks = [
 ];
 ---
 
-<footer class="bg-ispod-jet text-ispod-white border-t-2 border-ispod-blue/50 shadow-2xl pt-12 pb-8">
+<footer class="text-ispod-jet dark:text-ispod-white bg-gradient-to-b from-ispod-white to-gray-200 dark:from-ispod-jet dark:to-black pt-12 pb-8">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-8 items-center mb-8">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center mb-8">
             
             <div class="flex justify-center md:justify-start">
                 <a href="/" class="block transform hover:scale-105 transition-transform duration-300 ease-in-out">
@@ -27,27 +26,13 @@ const navLinks = [
                 </a>
             </div>
 
-            <nav class="text-center md:text-left">
-                <h3 class="text-lg font-semibold text-ispod-yellow mb-3">Quick Links</h3>
-                <ul class="space-y-2">
-                    {navLinks.map(link => (
-                        <li>
-                            <a href={link.href} class="hover:text-ispod-blue transition-colors duration-200 ease-in-out text-base">
-                                {link.text}
-                            </a>
-                        </li>
-                    ))}
-                </ul>
-            </nav>
-
             <div class="text-center md:text-right">
-                <h3 class="text-lg font-semibold text-ispod-yellow mb-3">Connect With Us</h3>
                 <div class="flex justify-center md:justify-end space-x-4">
                     {socialLinks.map(link => (
                         <a 
                             href={link.href} 
                             aria-label={link.label} 
-                            class="text-ispod-white hover:text-ispod-blue transform hover:scale-125 transition-all duration-300 ease-in-out"
+                            class="text-ispod-jet hover:text-ispod-blue dark:text-ispod-white dark:hover:text-ispod-yellow transform hover:scale-125 transition-all duration-300 ease-in-out"
                         >
                             <Icon name={link.iconName} size={28} />
                         </a>
@@ -56,7 +41,7 @@ const navLinks = [
             </div>
         </div>
 
-        <div class="text-center text-sm text-gray-400 pt-8 border-t border-gray-700">
+        <div class="text-center text-sm text-gray-400 pt-8">
             <p>&copy; {currentYear} IspodNule. All rights reserved.</p>
             <p class="mt-1">Crafted with <Icon name="mdi:heart" class="inline-block text-red-500" size={16} /> in Astro</p>
         </div>

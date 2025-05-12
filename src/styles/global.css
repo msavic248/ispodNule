@@ -11,3 +11,21 @@
 }
 
 @import './html_content.css';
+
+button,
+a {
+  @apply cursor-pointer;
+}
+
+.grainy::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAMAAAAp4XiDAAAAUVBMVEWFhYWDg4N3d3dtbW17e3t1dXWBgYGHh4d5eXlzc3NlZWWRkZFOTk5TU1NTEREDBQcAAADs7OzV1dUAAAAKCQkAAAAAAAABAgQCAgMAAACSrWlNAAAAFL0JREFUeJyNl0sOgyAMRM3fAELq6P//q1W3rEzL4fJE2LgEwMAHw95F0FBrC9fc2XWw92xG2f0jK+v0K8s/NGbHWX0rD40Fa/QgPDT2g0M2gVADXrgL0g+G5gLqCBrAwJEFU0gD4uK0AnM+A/hLwLgD6zL0CsHscYvTMCcM49LCsbx8aM2XEjgV7TbwfJt5mAGwAgwV7TVgZgB5+AMLzI8yL0jO4zEc45lV9LHL7LAbD6hYId3fALZqJkZTuY1SAAAAAElFTkSuQmCC");
+  opacity: 0.08; /* Adjust intensity as needed */
+  pointer-events: none;
+  z-index: 0; /* Places it above the background but below positioned content */
+}

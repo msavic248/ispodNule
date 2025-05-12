@@ -4,6 +4,16 @@ import "../styles/global.css";
 import Head from '../components/Head.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
+import { Icon } from 'astro-icon/components'; // Import Icon component
+
+// Placeholder sponsor logos (using MDI icons)
+const sponsorLogos = [
+  { name: "Sponsor 1", iconName: "mdi:star-circle-outline" },
+  { name: "Sponsor 2", iconName: "mdi:triangle-outline" },
+  { name: "Sponsor 3", iconName: "mdi:hexagon-outline" },
+  { name: "Sponsor 4", iconName: "mdi:octagon-outline" },
+  { name: "Sponsor 5", iconName: "mdi:pentagon-outline" },
+];
 ---
 
 <!doctype html>
@@ -27,6 +37,20 @@ import Footer from '../components/Footer.astro';
 	<body>
 		<Header />
 		<slot />
+
+		<!-- Our Sponsors Section -->
+		<section class="py-8 bg-ispod-white dark:bg-ispod-jet border-t border-b border-gray-200 dark:border-gray-700">
+			<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+				<div class="flex flex-wrap justify-center items-center gap-x-8 gap-y-4 sm:gap-x-12 md:gap-x-16">
+					{sponsorLogos.map(sponsor => (
+						<div title={sponsor.name} class="text-ispod-jet dark:text-ispod-white hover:text-ispod-blue dark:hover:text-ispod-yellow transition-colors duration-200">
+							<Icon name={sponsor.iconName} size={48} class="opacity-75 hover:opacity-100" />
+						</div>
+					))}
+				</div>
+			</div>
+		</section>
+
 		<Footer />
 	</body>
 </html>
